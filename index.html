@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BayView Sheet Metal — Mockup Variations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 28px 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    header img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    header .brand h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+    header .brand p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .hero {
+      text-align: center;
+      padding: 72px 24px 48px;
+    }
+    .hero .tag {
+      display: inline-block;
+      background: rgba(170,255,0,0.12);
+      color: #aaff00;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(170,255,0,0.3);
+      margin-bottom: 20px;
+    }
+    .hero h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    .hero h2 span { color: #aaff00; }
+    .hero p {
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 48px 80px;
+    }
+    .card {
+      background: #161616;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(170,255,0,0.35);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(170,255,0,0.15);
+    }
+    .card-preview {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .card-body {
+      padding: 22px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-num {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 18px;
+    }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #aaff00;
+      color: #0a0a0a;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .card-cta:hover { background: #c8ff33; transform: scale(1.04); }
+    .card-cta svg { width: 14px; height: 14px; }
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+    .badge-navy { background: rgba(26,58,108,0.5); color: #6fa3ef; border: 1px solid rgba(111,163,239,0.25); }
+    .badge-teal { background: rgba(26,100,100,0.5); color: #4dd9c0; border: 1px solid rgba(77,217,192,0.25); }
+    .badge-dark { background: rgba(26,64,64,0.5); color: #5ecfcf; border: 1px solid rgba(94,207,207,0.25); }
+    .badge-neon { background: rgba(100,150,0,0.25); color: #aaff00; border: 1px solid rgba(170,255,0,0.3); }
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.25);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 640px) {
+      header { padding: 20px 20px; }
+      .hero { padding: 48px 20px 32px; }
+      .grid { padding: 16px 20px 60px; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="bayviewlogo.png" alt="BayView Sheet Metal Logo" />
+    <div class="brand">
+      <h1>BayView Sheet Metal</h1>
+      <p>Heating &amp; Air Conditioning Inc. — London, Ontario</p>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="tag">Design Mockup Showcase</div>
+    <h2>4 Design <span>Variations</span></h2>
+    <p>High-fidelity mockup demos for BayView Sheet Metal. Each variation explores a distinct visual style and layout approach. Click any card to preview the full design.</p>
+  </section>
+
+  <div class="grid">
+    <!-- Variation 1 -->
+    <a class="card" href="variation1-navy-yellow.html" target="_blank">
+      <img class="card-preview" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80" alt="Variation 1 Preview" />
+      <div class="card-body">
+        <div class="card-num">Variation 01</div>
+        <span class="badge badge-navy">Navy &amp; Yellow</span>
+        <div class="card-title">Plumbera HVAC Template</div>
+        <div class="card-desc">Bold navy and yellow color scheme with service accordions, stats bar, testimonials grid, FAQ, and a 24/7 emergency CTA. Classic and professional.</div>
+        <a class="card-cta" href="variation1-navy-yellow.html" target="_blank">
+          View Design
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </a>
+
+    <!-- Variation 2 -->
+    <a class="card" href="variation2-contek-teal.html" target="_blank">
+      <img class="card-preview" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Variation 2 Preview" />
+      <div class="card-body">
+        <div class="card-num">Variation 02</div>
+        <span class="badge badge-teal">Teal &amp; Gold Editorial</span>
+        <div class="card-title">Contek Webflow Template</div>
+        <div class="card-desc">Teal-to-orange gradient mesh with serif italic headings, editorial magazine layout, asymmetric project grid, and a split FAQ section.</div>
+        <a class="card-cta" href="variation2-contek-teal.html" target="_blank">
+          View Design
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </a>
+
+    <!-- Variation 3 -->
+    <a class="card" href="variation3-kayano-dark.html" target="_blank">
+      <img class="card-preview" src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Variation 3 Preview" />
+      <div class="card-body">
+        <div class="card-num">Variation 03</div>
+        <span class="badge badge-dark">Dark Teal &amp; Orange</span>
+        <div class="card-title">Kayano Webflow Template</div>
+        <div class="card-desc">Deep teal with orange accents, full-bleed hero with massive typography, wave SVG dividers, horizontal service cards, and a booking form.</div>
+        <a class="card-cta" href="variation3-kayano-dark.html" target="_blank">
+          View Design
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </a>
+
+    <!-- Variation 4 -->
+    <a class="card" href="variation4-pipecraft-neon.html" target="_blank">
+      <img class="card-preview" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Variation 4 Preview" />
+      <div class="card-body">
+        <div class="card-num">Variation 04</div>
+        <span class="badge badge-neon">Black &amp; Neon Green</span>
+        <div class="card-title">Pipecraft Webflow Template</div>
+        <div class="card-desc">Near-black background with neon green accents, Barlow Condensed ultra-bold typography, pill navbar, scrolling ticker, and masonry project grid.</div>
+        <a class="card-cta" href="variation4-pipecraft-neon.html" target="_blank">
+          View Design
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 BayView Sheet Metal, Heating &amp; Air Conditioning Inc. &mdash; 5 Bayview Court, London, Ontario &mdash; (519) 452-3963
+  </footer>
+</body>
+</html>

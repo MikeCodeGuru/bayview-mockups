@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BayView Sheet Metal — Heating & Air Conditioning Inc.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream:   #f5f1ea;
+      --cream2:  #ede8df;
+      --teal:    #0097a7;
+      --teal-dk: #006d7a;
+      --teal-lt: #00bcd4;
+      --orange:  #e07b39;
+      --amber:   #d4a017;
+      --gold:    #e8c84a;
+      --dark:    #111111;
+      --dark2:   #1c1c1c;
+      --mid:     #3a3a3a;
+      --gray:    #6b6b6b;
+      --lgray:   #a0a0a0;
+      --white:   #ffffff;
+      --border:  #ddd8cf;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--cream); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ── GRADIENT MESH (signature element) ── */
+    .gradient-mesh {
+      background: linear-gradient(135deg, #006d7a 0%, #0097a7 25%, #00bcd4 45%, #e07b39 75%, #d4601a 100%);
+      position: relative;
+    }
+    .gradient-mesh::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0,0,0,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── GRID PATTERN ── */
+    .grid-bg {
+      background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+    h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* ── BUTTONS ── */
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold); color: var(--dark);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+      padding: 13px 28px; border-radius: 50px; border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-gold:hover { background: #d4b030; transform: translateY(-1px); }
+    .btn-outline-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--dark);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+      padding: 12px 26px; border-radius: 50px; border: 2px solid var(--dark); cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline-dark:hover { background: var(--dark); color: var(--white); }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--white);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+      padding: 12px 26px; border-radius: 50px; border: 2px solid var(--white); cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline-white:hover { background: var(--white); color: var(--dark); }
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--dark); color: var(--white);
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+      padding: 13px 28px; border-radius: 50px; border: none; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-dark:hover { background: var(--mid); }
+
+    /* ── SECTION TAG ── */
+    .section-tag {
+      display: inline-block; font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--teal); margin-bottom: 14px;
+    }
+    .section-tag-light { color: rgba(255,255,255,0.7); }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+    /* ═══════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 300;
+      background: rgba(245,241,234,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: flex; align-items: center; justify-content: space-between; height: 70px;
+    }
+    .logo-wordmark {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-wordmark img { width: 44px; height: 44px; object-fit: contain; border-radius: 50%; flex-shrink: 0; }
+    .logo-wordmark-text { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--dark); letter-spacing: -0.5px; }
+    .logo-wordmark-text span { color: var(--teal); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--mid); transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta { display: flex; align-items: center; gap: 16px; }
+    .nav-phone-small { font-size: 13px; font-weight: 600; color: var(--mid); display: flex; align-items: center; gap: 6px; }
+    .nav-phone-small i { color: var(--teal); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      width: 40px; height: 40px; align-items: center; justify-content: center;
+      cursor: pointer; background: none; border: none; border-radius: 6px;
+      transition: background .2s;
+    }
+    .hamburger:hover { background: var(--cream2); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); border-radius: 2px; transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0; bottom: 0;
+      background: var(--cream); z-index: 299; padding: 28px 28px 40px;
+      flex-direction: column; gap: 0; overflow-y: auto;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu ul { list-style: none; margin-bottom: 24px; }
+    .mobile-menu ul li a {
+      display: block; padding: 14px 0; font-size: 18px; font-weight: 600;
+      color: var(--dark); border-bottom: 1px solid var(--border);
+      font-family: 'Playfair Display', serif;
+    }
+    .mobile-menu ul li a:hover { color: var(--teal); }
+    .mobile-menu-phone { font-size: 16px; font-weight: 600; color: var(--teal); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .mobile-menu .btn-gold { width: 100%; justify-content: center; padding: 15px; font-size: 15px; }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: flex-end; padding-bottom: 0; position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #005f6b 0%, #0097a7 30%, #00bcd4 50%, #c96a20 78%, #b85510 100%);
+    }
+    .hero-bg::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 15% 85%, rgba(255,255,255,0.12) 0%, transparent 45%),
+                        radial-gradient(circle at 85% 15%, rgba(0,0,0,0.15) 0%, transparent 45%),
+                        radial-gradient(circle at 50% 50%, rgba(255,200,80,0.06) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      align-items: flex-end; padding-top: 120px; padding-bottom: 0;
+    }
+    .hero-left { padding-bottom: 80px; }
+    .hero-eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(42px, 5.5vw, 72px); font-weight: 700; line-height: 1.08;
+      color: var(--white); margin-bottom: 24px; font-style: italic;
+    }
+    .hero-body { color: rgba(255,255,255,0.80); font-size: 16px; line-height: 1.75; max-width: 480px; margin-bottom: 36px; }
+    .hero-right { display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding-bottom: 0; }
+    .hero-card {
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 14px;
+      overflow: hidden; cursor: pointer; transition: transform .2s;
+    }
+    .hero-card:hover { transform: translateY(-3px); }
+    .hero-card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.85; }
+    .hero-card-body { padding: 16px 18px 18px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .hero-card-body h3 { font-size: 17px; font-weight: 700; color: var(--white); line-height: 1.3; font-family: 'Playfair Display', serif; }
+    .hero-card-body p { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 4px; }
+    .hero-card-arrow { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-left: 12px; }
+    .hero-card-arrow i { color: var(--dark); font-size: 13px; }
+
+    /* ═══════════════════════════════════════════
+       ABOUT
+    ═══════════════════════════════════════════ */
+    .about { background: var(--cream); padding: 100px 0; }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about h2 { font-size: clamp(34px, 3.5vw, 52px); font-weight: 700; line-height: 1.1; color: var(--dark); margin-bottom: 28px; }
+    .about-right p { font-size: 15px; line-height: 1.85; color: var(--mid); margin-bottom: 16px; }
+    .about-btns { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+    .about-divider { width: 48px; height: 3px; background: var(--teal); margin-bottom: 24px; border-radius: 2px; }
+
+    /* ═══════════════════════════════════════════
+       STRENGTHS (dark image bg)
+    ═══════════════════════════════════════════ */
+    .strengths { position: relative; overflow: hidden; }
+    .strengths-bg { position: absolute; inset: 0; }
+    .strengths-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
+    .strengths-inner {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; padding: 100px 0;
+    }
+    .strengths h2 { font-size: clamp(32px, 3.5vw, 50px); font-weight: 700; line-height: 1.1; color: var(--white); font-style: italic; }
+    .strengths-left p { color: rgba(255,255,255,0.70); font-size: 15px; line-height: 1.8; margin-top: 20px; }
+    .strengths-list { display: flex; flex-direction: column; gap: 32px; }
+    .strength-item { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 24px; }
+    .strength-item h4 { font-size: 17px; font-weight: 600; color: var(--white); margin-bottom: 8px; font-family: 'Playfair Display', serif; }
+    .strength-item p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+    .strength-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+    .strength-icon i { color: var(--gold); font-size: 16px; }
+
+    /* ═══════════════════════════════════════════
+       PROJECTS
+    ═══════════════════════════════════════════ */
+    .projects { background: var(--cream); padding: 100px 0; }
+    .projects-header { text-align: center; margin-bottom: 56px; }
+    .projects-header h2 { font-size: clamp(34px, 3.5vw, 52px); font-weight: 700; line-height: 1.1; color: var(--dark); margin-bottom: 28px; font-style: italic; }
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto auto; gap: 14px; }
+    .project-card { position: relative; overflow: hidden; border-radius: 14px; cursor: pointer; }
+    .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .project-card:hover img { transform: scale(1.04); }
+    .project-card-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.75) 100%); }
+    .project-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .project-card-body h3 { font-size: 16px; font-weight: 700; color: var(--white); line-height: 1.3; font-family: 'Playfair Display', serif; }
+    .project-card-body p { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 3px; }
+    .project-arrow { width: 34px; height: 34px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-left: 10px; }
+    .project-arrow i { color: var(--dark); font-size: 12px; }
+    .project-card.tall { grid-row: span 2; }
+    .project-card.tall img { height: 100%; min-height: 420px; }
+    .project-card:not(.tall) img { height: 240px; }
+
+    /* ═══════════════════════════════════════════
+       SOLUTIONS / SERVICES
+    ═══════════════════════════════════════════ */
+    .solutions { background: var(--teal); padding: 100px 0; position: relative; overflow: hidden; }
+    .solutions::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .solutions-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .solutions h2 { font-size: clamp(30px, 3vw, 46px); font-weight: 700; line-height: 1.1; color: var(--white); font-style: italic; margin-bottom: 20px; }
+    .solutions-left p { color: rgba(255,255,255,0.78); font-size: 15px; line-height: 1.8; margin-bottom: 32px; }
+    .solutions-right { position: relative; }
+    .solutions-img { width: 100%; height: 480px; object-fit: cover; border-radius: 16px; }
+    .stat-float {
+      position: absolute; background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 14px 18px;
+      color: var(--white);
+    }
+    .stat-float-1 { top: 30px; left: -30px; }
+    .stat-float-2 { top: 110px; left: -30px; }
+    .stat-float strong { font-size: 22px; font-weight: 800; color: var(--gold); display: block; }
+    .stat-float span { font-size: 12px; color: rgba(255,255,255,0.7); }
+    .solutions-cards { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 20px; }
+    .solution-card { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 28px; transition: background .2s; }
+    .solution-card:hover { background: rgba(255,255,255,0.18); }
+    .solution-card-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .solution-card-icon i { color: var(--gold); font-size: 18px; }
+    .solution-card h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+    .solution-card p { font-size: 13px; color: rgba(255,255,255,0.70); line-height: 1.7; }
+
+    /* ═══════════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════════ */
+    .testimonials { background: var(--cream); padding: 100px 0; }
+    .testimonials-header { margin-bottom: 52px; }
+    .testimonials-header h2 { font-size: clamp(32px, 3.5vw, 50px); font-weight: 700; line-height: 1.1; color: var(--dark); font-style: italic; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .testimonial-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; }
+    .quote-mark { font-size: 80px; line-height: 0.6; color: var(--teal); opacity: 0.15; font-family: 'Playfair Display', serif; position: absolute; top: 24px; left: 28px; }
+    .testimonial-text { font-size: 14px; line-height: 1.8; color: var(--mid); margin-bottom: 24px; padding-top: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--border); padding-top: 18px; }
+    .author-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 700; font-size: 15px; flex-shrink: 0; }
+    .author-name { font-size: 14px; font-weight: 700; color: var(--dark); }
+    .author-role { font-size: 12px; color: var(--lgray); }
+
+    /* ═══════════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════════ */
+    .faq { background: var(--cream2); padding: 100px 0; }
+    .faq-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .faq-left { position: relative; border-radius: 18px; overflow: hidden; }
+    .faq-left img { width: 100%; height: 500px; object-fit: cover; filter: brightness(0.55); }
+    .faq-left-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 36px; }
+    .faq-left-overlay h3 { font-size: 30px; font-weight: 700; color: var(--white); line-height: 1.2; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-style: italic; }
+    .faq-left-overlay p { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 22px; }
+    .faq-right h2 { font-size: clamp(28px, 2.8vw, 40px); font-weight: 700; color: var(--dark); margin-bottom: 36px; font-style: italic; line-height: 1.2; }
+    .faq-accordion { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; cursor: pointer; gap: 16px; }
+    .faq-question span { font-size: 15px; font-weight: 600; color: var(--dark); line-height: 1.4; }
+    .faq-question i { color: var(--teal); font-size: 14px; transition: transform .2s; flex-shrink: 0; }
+    .faq-answer { display: none; padding-bottom: 18px; font-size: 14px; color: var(--gray); line-height: 1.8; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-question i { transform: rotate(45deg); }
+    .faq-item.open .faq-question span { color: var(--teal); }
+
+    /* ═══════════════════════════════════════════
+       BLOG
+    ═══════════════════════════════════════════ */
+    .blog { background: var(--cream); padding: 100px 0; }
+    .blog-header { margin-bottom: 52px; }
+    .blog-header h2 { font-size: clamp(32px, 3.5vw, 50px); font-weight: 700; color: var(--dark); font-style: italic; line-height: 1.1; }
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .blog-card { border-right: 1px solid var(--border); overflow: hidden; transition: background .2s; }
+    .blog-card:last-child { border-right: none; }
+    .blog-card:hover { background: var(--cream2); }
+    .blog-card-img { width: 100%; height: 220px; object-fit: cover; }
+    .blog-card-body { padding: 24px; }
+    .blog-tag { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .blog-card h4 { font-size: 17px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+    .blog-card p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 16px; }
+    .blog-meta { font-size: 12px; color: var(--lgray); margin-bottom: 14px; }
+    .read-more-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--teal); }
+    .read-more-link:hover { color: var(--teal-dk); }
+    .read-more-link i { font-size: 11px; }
+
+    /* ═══════════════════════════════════════════
+       BOTTOM CTA
+    ═══════════════════════════════════════════ */
+    .bottom-cta {
+      padding: 120px 0; text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #005f6b 0%, #0097a7 30%, #00bcd4 50%, #c96a20 78%, #b85510 100%);
+    }
+    .bottom-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.10) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0,0,0,0.12) 0%, transparent 50%);
+    }
+    .bottom-cta-inner { position: relative; z-index: 2; }
+    .bottom-cta h2 { font-size: clamp(36px, 4vw, 60px); font-weight: 700; color: var(--white); line-height: 1.1; margin-bottom: 20px; font-style: italic; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .bottom-cta p { color: rgba(255,255,255,0.78); font-size: 16px; max-width: 520px; margin: 0 auto 36px; line-height: 1.75; }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer { background: var(--dark2); color: rgba(255,255,255,0.6); padding: 72px 0 0; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; padding-bottom: 48px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-logo img { width: 44px; height: 44px; object-fit: contain; border-radius: 50%; flex-shrink: 0; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--white); }
+    .footer-logo-text span { color: var(--teal-lt); }
+    .footer-brand p { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); font-size: 14px; transition: background .2s, color .2s; }
+    .social-icon:hover { background: var(--teal); color: var(--white); }
+    .footer-col h4 { font-size: 12px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color .2s; }
+    .footer-links a:hover { color: var(--teal-lt); }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 13px; color: rgba(255,255,255,0.5); }
+    .footer-contact-item i { color: var(--teal-lt); margin-top: 2px; flex-shrink: 0; font-size: 13px; }
+    .footer-hours { list-style: none; }
+    .footer-hours li { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.5); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .footer-hours li span:last-child { color: var(--gold); font-weight: 600; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); }
+    .footer-bottom span { color: var(--teal-lt); }
+
+    /* ═══════════════════════════════════════════
+       DIVIDER
+    ═══════════════════════════════════════════ */
+    .section-divider { height: 1px; background: var(--border); }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .container { padding: 0 28px; }
+      .nav-inner { padding: 0 28px; }
+      .hero-inner { padding: 100px 28px 0; }
+      .hero h1 { font-size: 48px; }
+      .about-inner { gap: 48px; }
+      .strengths-inner { gap: 40px; }
+      .solutions-inner { gap: 40px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 767px) {
+      .container { padding: 0 20px; }
+      .nav-inner { padding: 0 20px; height: 62px; }
+      .logo-wordmark { font-size: 18px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { top: 62px; }
+
+      /* Hero */
+      .hero { min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; padding: 80px 20px 0; gap: 28px; }
+      .hero-left { padding-bottom: 0; }
+      .hero h1 { font-size: 36px; }
+      .hero-body { font-size: 15px; }
+      .hero-right { flex-direction: row; gap: 10px; overflow-x: auto; padding-bottom: 0; }
+      .hero-card { min-width: 240px; flex-shrink: 0; }
+      .hero-card img { height: 150px; }
+
+      /* About */
+      .about { padding: 64px 0; }
+      .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .about h2 { font-size: 30px; }
+      .about-btns { flex-direction: column; }
+      .about-btns .btn-gold, .about-btns .btn-outline-dark { width: 100%; justify-content: center; padding: 14px; }
+
+      /* Strengths */
+      .strengths-inner { grid-template-columns: 1fr; gap: 36px; padding: 64px 0; }
+      .strengths h2 { font-size: 28px; }
+
+      /* Projects */
+      .projects { padding: 64px 0; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.tall { grid-row: span 1; }
+      .project-card.tall img { min-height: 260px; height: 260px; }
+      .project-card:not(.tall) img { height: 220px; }
+
+      /* Solutions */
+      .solutions { padding: 64px 0; }
+      .solutions-inner { grid-template-columns: 1fr; gap: 36px; }
+      .solutions h2 { font-size: 28px; }
+      .solutions-img { height: 300px; }
+      .stat-float-1 { left: 10px; top: 16px; }
+      .stat-float-2 { left: 10px; top: 90px; }
+      .solutions-cards { grid-template-columns: 1fr; gap: 14px; }
+
+      /* Testimonials */
+      .testimonials { padding: 64px 0; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      /* FAQ */
+      .faq { padding: 64px 0; }
+      .faq-inner { grid-template-columns: 1fr; gap: 36px; }
+      .faq-left img { height: 300px; }
+      .faq-right h2 { font-size: 26px; }
+
+      /* Blog */
+      .blog { padding: 64px 0; }
+      .blog-grid { grid-template-columns: 1fr; border-radius: 14px; }
+      .blog-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .blog-card:last-child { border-bottom: none; }
+
+      /* Bottom CTA */
+      .bottom-cta { padding: 72px 0; }
+      .bottom-cta h2 { font-size: 30px; }
+      .bottom-cta-btns { flex-direction: column; align-items: center; }
+      .bottom-cta-btns .btn-gold, .bottom-cta-btns .btn-outline-white { width: 100%; max-width: 320px; justify-content: center; padding: 15px; font-size: 15px; }
+
+      /* Footer */
+      footer { padding: 52px 0 0; }
+      .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 30px; }
+      .hero-card { min-width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo-wordmark"><img src="bayviewlogo.png" alt="BayView Sheet Metal Logo"/><div class="logo-wordmark-text">Bay<span>View</span> Sheet Metal</div></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <div class="nav-phone-small"><i class="fa fa-phone"></i>(519) 452-3963</div>
+      <a href="#contact" class="btn-gold">Contact Us</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#services" class="mobile-link">Services</a></li>
+      <li><a href="#projects" class="mobile-link">Projects</a></li>
+      <li><a href="#faq" class="mobile-link">FAQ</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+    <div class="mobile-menu-phone"><i class="fa fa-phone"></i>(519) 452-3963</div>
+    <a href="#contact" class="btn-gold mobile-link">Get a Free Estimate</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner container" style="max-width:1200px;margin:0 auto;">
+    <div class="hero-left">
+      <span class="hero-eyebrow">London, Ontario — Est. 30+ Years</span>
+      <h1>From blueprint to comfort — heating &amp; cooling built to last</h1>
+      <p class="hero-body">BayView Sheet Metal, Heating &amp; Air Conditioning Inc. is a family owned and operated business that has served London and the surrounding area for over 30 years. We specialize in commercial and light industrial HVAC projects with quality workmanship at competitive prices.</p>
+      <a href="#contact" class="btn-gold">Let's Build Together &nbsp;<i class="fa fa-arrow-right"></i></a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-card">
+        <img src="../bayview/images/commercial-hvac.jpg" alt="Sheet Metal Fabrication" />
+        <div class="hero-card-body">
+          <div>
+            <h3>Sheet Metal Fabrication</h3>
+            <p>Custom in-house fabrication for commercial &amp; industrial projects</p>
+          </div>
+          <div class="hero-card-arrow"><i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="../bayview/images/heating-install.jpg" alt="HVAC Installation" />
+        <div class="hero-card-body">
+          <div>
+            <h3>HVAC Installation &amp; Maintenance</h3>
+            <p>Rooftop units, furnaces, walk-in coolers &amp; more</p>
+          </div>
+          <div class="hero-card-arrow"><i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-left">
+        <span class="section-tag">About Us</span>
+        <h2>Engineering possibility into every system we build</h2>
+      </div>
+      <div class="about-right">
+        <div class="about-divider"></div>
+        <p>BayView Sheet Metal, Heating &amp; Air Conditioning Inc. is a family owned and operated business that has serviced London and the surrounding area for over 30 years. We specialize in commercial and light industrial projects and also service the construction industry.</p>
+        <p>We are an established and respected company in our industry with an excellent track record and some of the best customer satisfaction in the region. We offer the best quality and workmanship at competitive prices — because we treat every project as if it were our own.</p>
+        <div class="about-btns">
+          <a href="#about" class="btn-gold">More About Us</a>
+          <a href="#contact" class="btn-outline-dark">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══ STRENGTHS ═══ -->
+<section class="strengths" id="strengths">
+  <div class="strengths-bg">
+    <img src="../bayview/images/hero-tech.jpg" alt="HVAC technician at work" />
+  </div>
+  <div class="container">
+    <div class="strengths-inner">
+      <div class="strengths-left">
+        <span class="section-tag section-tag-light">Our Strengths</span>
+        <h2>From sheet metal to skyline — the core strengths that define our approach</h2>
+        <p>With a legacy of excellence and an eye on the future, we deliver HVAC and sheet metal solutions that stand the test of time.</p>
+      </div>
+      <div class="strengths-list">
+        <div class="strength-item">
+          <div class="strength-icon"><i class="fa fa-industry"></i></div>
+          <h4>In-House Fabrication</h4>
+          <p>All sheet metal work — HVAC components, exhaust systems, custom fabrications, and flashings — is fabricated right in our own shop for precision, speed, and competitive pricing.</p>
+        </div>
+        <div class="strength-item">
+          <div class="strength-icon"><i class="fa fa-leaf"></i></div>
+          <h4>Energy-Efficient Solutions</h4>
+          <p>We integrate modern, energy-efficient HVAC systems and smart building technologies to reduce operating costs and environmental impact for every client.</p>
+        </div>
+        <div class="strength-item">
+          <div class="strength-icon"><i class="fa fa-clock"></i></div>
+          <h4>Reliable, On-Time Service</h4>
+          <p>With 30+ years of experience and a dedicated team, we deliver results on schedule — no exceptions. Our clients trust us to show up and deliver, every time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <span class="section-tag">Our Work</span>
+      <h2>Discover what we've been building lately</h2>
+      <a href="#contact" class="btn-gold" style="margin-top:20px">Ready to Build &nbsp;<i class="fa fa-arrow-right"></i></a>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card tall">
+        <img src="../bayview/images/ductwork.jpg" alt="Commercial Ductwork Project" />
+        <div class="project-card-overlay"></div>
+        <div class="project-card-body">
+          <div>
+            <h3>Commercial Ductwork &amp; Ventilation</h3>
+            <p>Custom fabricated ductwork for a large commercial facility</p>
+          </div>
+          <div class="project-arrow"><i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="../bayview/images/heating-system.jpg" alt="Rooftop HVAC Units" />
+        <div class="project-card-overlay"></div>
+        <div class="project-card-body">
+          <div>
+            <h3>Commercial Rooftop HVAC Units</h3>
+            <p>Installation &amp; maintenance of rooftop systems</p>
+          </div>
+          <div class="project-arrow"><i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="../bayview/images/tech-working.jpg" alt="Industrial Exhaust System" />
+        <div class="project-card-overlay"></div>
+        <div class="project-card-body">
+          <div>
+            <h3>Industrial Welded Exhaust Systems</h3>
+            <p>Custom engineered exhaust for light industrial environments</p>
+          </div>
+          <div class="project-arrow"><i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="../bayview/images/hvac-maintenance.jpg" alt="Walk-In Cooler Maintenance" />
+        <div class="project-card-overlay"></div>
+        <div class="project-card-body">
+          <div>
+            <h3>Walk-In Cooler Maintenance</h3>
+            <p>Ongoing service for commercial refrigeration systems</p>
+          </div>
+          <div class="project-arrow"><i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SOLUTIONS / SERVICES ═══ -->
+<section class="solutions" id="services">
+  <div class="container">
+    <div class="solutions-inner">
+      <div class="solutions-left">
+        <span class="section-tag section-tag-light">Our Services</span>
+        <h2>Innovative HVAC solutions designed to meet every challenge</h2>
+        <p>At the core of everything we do is a commitment to quality, precision, and value. Our services are tailored to meet the diverse needs of our clients — whether you're developing commercial spaces, industrial facilities, or construction projects.</p>
+        <a href="#contact" class="btn-gold">Explore Solutions &nbsp;<i class="fa fa-arrow-right"></i></a>
+      </div>
+      <div class="solutions-right">
+        <img src="../bayview/images/tech-portrait.jpg" alt="BayView Sheet Metal team" class="solutions-img" />
+        <div class="stat-float stat-float-1">
+          <strong>30+</strong>
+          <span>Years serving London, ON</span>
+        </div>
+        <div class="stat-float stat-float-2">
+          <strong>100%</strong>
+          <span>Customer satisfaction focus</span>
+        </div>
+      </div>
+      <div class="solutions-cards">
+        <div class="solution-card">
+          <div class="solution-card-icon"><i class="fa fa-tools"></i></div>
+          <h4>Sheet Metal Fabrication &amp; Installation</h4>
+          <p>Custom fabrication and installation of HVAC systems, welded exhaust systems, custom sheet metal work, and flashings — all produced in our own shop.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-card-icon"><i class="fa fa-wind"></i></div>
+          <h4>HVAC &amp; Refrigeration Services</h4>
+          <p>Installation and maintenance of heating and air conditioning equipment, walk-in coolers, and commercial rooftop units and furnaces for businesses throughout London.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-card-icon"><i class="fa fa-hard-hat"></i></div>
+          <h4>Construction Industry Support</h4>
+          <p>We partner with general contractors and construction firms to deliver complete HVAC and sheet metal solutions on commercial and light industrial builds throughout the region.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="section-tag">Client Reviews</span>
+      <h2>What our clients say about working with us</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">BayView Sheet Metal has been our go-to HVAC contractor for years. Their custom fabrication work is second to none, and they always deliver on time and on budget. Truly a professional operation.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MK</div>
+          <div><div class="author-name">Mark K.</div><div class="author-role">General Contractor, London ON</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">We've used BayView for our commercial building's HVAC maintenance for over a decade. The Rulton family runs a tight ship — honest, reliable, and always fair on pricing. Highly recommended.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SC</div>
+          <div><div class="author-name">Sandra C.</div><div class="author-role">Property Manager, London ON</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">The custom exhaust system BayView fabricated for our industrial facility was perfectly engineered and installed without any disruption to our operations. Outstanding craftsmanship from a team that truly cares.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RD</div>
+          <div><div class="author-name">Rob D.</div><div class="author-role">Facilities Manager, London ON</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="faq-left">
+        <img src="../bayview/images/tech-smiling.jpg" alt="BayView Sheet Metal specialist" />
+        <div class="faq-left-overlay">
+          <h3>Still have questions?</h3>
+          <p>Contact us for more information about our services.</p>
+          <a href="#contact" class="btn-gold">Contact Us &nbsp;<i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="faq-right">
+        <span class="section-tag">FAQs</span>
+        <h2>Answers to your most common questions</h2>
+        <div class="faq-accordion">
+          <div class="faq-item open">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What types of projects does BayView Sheet Metal specialize in?</span>
+              <i class="fa fa-plus"></i>
+            </div>
+            <div class="faq-answer">We specialize in commercial and light industrial HVAC projects, including fabrication and installation of HVAC systems, welded exhaust systems, custom sheet metal work, and flashings. We also service the construction industry throughout London and the surrounding area.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Do you fabricate custom sheet metal in-house?</span>
+              <i class="fa fa-plus"></i>
+            </div>
+            <div class="faq-answer">Yes. All of our sheet metal work is fabricated right in our own shop. This allows us to deliver custom solutions faster and at more competitive prices than companies that outsource fabrication.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Do you service walk-in coolers and commercial refrigeration?</span>
+              <i class="fa fa-plus"></i>
+            </div>
+            <div class="faq-answer">Yes. Our services include installation and maintenance of walk-in coolers and commercial rooftop HVAC units. We have the expertise to keep your commercial refrigeration systems running reliably and efficiently.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What areas do you serve?</span>
+              <i class="fa fa-plus"></i>
+            </div>
+            <div class="faq-answer">BayView Sheet Metal primarily serves London, Ontario and the surrounding communities. We have been serving this region for over 30 years and are well-established throughout the area.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How do I get started with a new project?</span>
+              <i class="fa fa-plus"></i>
+            </div>
+            <div class="faq-answer">Getting started is simple. Call us at (519) 452-3963 or email alrulton@bayviewsheetmetal.com. Our team will review your project requirements and provide a competitive estimate promptly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BLOG ═══ -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="blog-header">
+      <span class="section-tag">HVAC Tips &amp; Insights</span>
+      <h2>Updates from the world of HVAC &amp; sheet metal</h2>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <img src="../bayview/images/heating-system.jpg" alt="HVAC Maintenance" class="blog-card-img" />
+        <div class="blog-card-body">
+          <div class="blog-tag">Maintenance</div>
+          <h4>Why Regular HVAC Maintenance Saves Your Business Money</h4>
+          <p>Preventive maintenance on commercial systems reduces emergency repair costs and extends equipment life.</p>
+          <div class="blog-meta"><i class="fa fa-calendar" style="color:var(--teal);margin-right:5px"></i>Apr 15, 2026</div>
+          <a href="#" class="read-more-link">Read More <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="../bayview/images/ductwork.jpg" alt="Sheet Metal Fabrication" class="blog-card-img" />
+        <div class="blog-card-body">
+          <div class="blog-tag">Fabrication</div>
+          <h4>The Benefits of Custom Sheet Metal Fabrication for Your Facility</h4>
+          <p>In-house custom fabrication delivers better performance and longer-lasting results than off-the-shelf components.</p>
+          <div class="blog-meta"><i class="fa fa-calendar" style="color:var(--teal);margin-right:5px"></i>Mar 28, 2026</div>
+          <a href="#" class="read-more-link">Read More <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <img src="../bayview/images/hvac-maintenance.jpg" alt="Walk-In Cooler" class="blog-card-img" />
+        <div class="blog-card-body">
+          <div class="blog-tag">Refrigeration</div>
+          <h4>Walk-In Cooler Maintenance: What Every Business Owner Should Know</h4>
+          <p>Our technicians share the top tips to keep your commercial refrigeration running reliably year-round.</p>
+          <div class="blog-meta"><i class="fa fa-calendar" style="color:var(--teal);margin-right:5px"></i>Mar 10, 2026</div>
+          <a href="#" class="read-more-link">Read More <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOTTOM CTA ═══ -->
+<section class="bottom-cta" id="contact">
+  <div class="container">
+    <div class="bottom-cta-inner">
+      <span class="section-tag section-tag-light">Get In Touch</span>
+      <h2>Transforming ideas into systems that stand the test of time</h2>
+      <p>From concept to completion, we're ready to turn your HVAC project into a lasting solution — let's talk about how we can bring your vision to life.</p>
+      <div class="bottom-cta-btns" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:+15194523963" class="btn-gold"><i class="fa fa-phone"></i>&nbsp;(519) 452-3963</a>
+        <a href="mailto:alrulton@bayviewsheetmetal.com" class="btn-outline-white"><i class="fa fa-envelope"></i>&nbsp;Email Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="bayviewlogo.png" alt="BayView Sheet Metal Logo"/><div class="footer-logo-text">Bay<span>View</span> Sheet Metal</div></div>
+        <p>BayView Sheet Metal, Heating &amp; Air Conditioning Inc. is a family owned and operated business serving London, Ontario and the surrounding area for over 30 years.</p>
+        <div class="footer-social">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="mailto:alrulton@bayviewsheetmetal.com" class="social-icon"><i class="fa fa-envelope"></i></a>
+          <a href="tel:+15194523963" class="social-icon"><i class="fa fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Business Hours</h4>
+        <ul class="footer-hours">
+          <li><span>Mon – Fri</span><span>7:30 AM – 5:00 PM</span></li>
+          <li><span>Saturday</span><span>By Appointment</span></li>
+          <li><span>Sunday</span><span>Closed</span></li>
+          <li><span>Emergency</span><span>Available</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><i class="fa fa-map-marker-alt"></i><span>5 Bayview Court<br />London, Ontario, Canada<br />N5W 5W4</span></div>
+        <div class="footer-contact-item"><i class="fa fa-phone"></i><span>(519) 452-3963</span></div>
+        <div class="footer-contact-item"><i class="fa fa-fax"></i><span>Fax: (519) 455-2356</span></div>
+        <div class="footer-contact-item"><i class="fa fa-envelope"></i><span>alrulton@bayviewsheetmetal.com</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 <span>BayView Sheet Metal, Heating &amp; Air Conditioning Inc.</span> All rights reserved.</p>
+      <p>5 Bayview Court, London, Ontario, Canada N5W 5W4</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Hamburger */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+    document.body.style.overflow = '';
+  }));
+
+  /* FAQ */
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* Smooth scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) {
+        e.preventDefault();
+        const navH = document.querySelector('nav').offsetHeight;
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - navH - 8, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
